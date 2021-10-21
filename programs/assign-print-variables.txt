@@ -1,0 +1,11 @@
+# This should start by printing 1, 2, and then 3.
+a = 1
+b = 2
+c = 3
+print(a)
+print(b)
+print(c)
+
+# The value of c is reassigned, so 4 should be printed next.
+c = 4
+print(c)

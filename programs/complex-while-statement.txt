@@ -1,0 +1,15 @@
+# This program prints out all of the perfect divisors of 144. Perfect divisors divide evenly into a number without any
+# remainder left over. The program finds them with a series of while loops. It should print out:
+# 1, 2, 3, 4, 6, 8, 9, 12, 16, 18, 24, 36, 48, 72, 144.
+number = 1
+while number < 145:
+    remainder = 144
+    while remainder > 0:
+        if remainder < number:
+            remainder = 0
+        if remainder == number:
+            print(number)
+            remainder = 0
+        if remainder > number:
+            remainder = remainder - number
+    number = number + 1

@@ -1,0 +1,8 @@
+# This will print out the first 10 numbers of the Fibonacci sequence: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.
+a = 0
+b = 1
+for n in range(0, 10):
+    print(a)
+    c = a + b
+    a = b
+    b = c

@@ -1,0 +1,31 @@
+x = 5
+
+# Only the second if statement is true, so only 3 should be printed.
+if x > 10:
+    print(10)
+if x > 3:
+    print(3)
+
+# Only the second if statement is true, so only 9 should be printed.
+if x < 2:
+    print(2)
+if x < 9:
+    print(9)
+
+# Only the first if statement is true, so only 5 should be printed.
+if x == 5:
+    print(5)
+if x == 7:
+    print(7)
+
+# The outside if statement is true, so 8 should be printed.
+if x < 20:
+    if x > 8:
+        print(10)
+    if x < 8:
+        print(8)
+
+# This entire if statement should be skipped, even though the inside one is true.
+if x > x + 1:
+    if x < 10:
+        print(10)

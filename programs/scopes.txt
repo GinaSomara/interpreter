@@ -1,0 +1,8 @@
+# This is the same scope example used in lecture. It should print out 15 and then 3.
+def scope_test(input):
+    x = 5
+    return x + input
+
+x = 3
+print(scope_test(10))
+print(x)

@@ -1,0 +1,10 @@
+# This program defines a single function and uses it multiple times. It should print out 2, 0, 1.
+def remainder(a, b):
+    factor = a / b
+    closest = factor * b
+    return a - closest
+
+result = remainder(11, 3)
+print(result)
+print(remainder(4, 2))
+print(remainder(11, result))

@@ -1,0 +1,12 @@
+# This program calculates something meaningless, making use of multiple functions. It should print out 27.
+def bar(y):
+    total = 0
+    while y > 0:
+        total = total + y
+        y = y - 1
+    return total
+
+def foo(x):
+    return bar(x) + bar(x / 2)
+
+print(foo(6))
