@@ -1,3 +1,5 @@
+//PROVIDED CODE
+
 package edu.csc413.interpreter;
 
 import edu.csc413.interpreter.statement.*;
@@ -34,6 +36,7 @@ public class Interpreter {
                         .filter(line -> !line.trim().isEmpty())
                         .filter(line -> !line.startsWith("#"))
                         .collect(Collectors.toCollection(LinkedList::new));
+
         Parser parser = new Parser();
         while (!lines.isEmpty()) {
             Statement statement = parseStatement(lines, parser, 0);

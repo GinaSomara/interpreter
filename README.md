@@ -1,5 +1,5 @@
 # CSC 413 Assignment 3 README
 
-Name:
+Name:  Gina Somara
 
-Email:
+Email:  gsomara@gmail.sfsu.edu
