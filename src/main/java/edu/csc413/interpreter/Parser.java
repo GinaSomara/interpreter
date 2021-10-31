@@ -20,18 +20,22 @@ import java.util.stream.Collectors;
  */
 public class Parser {
     public Expression createConstantExpression(int value) {
-        // TODO: Implement.
-        return null;
+        return new ConstantExpression(value);
     }
 
     public Expression createVariableExpression(String variableName) {
-        // TODO: Implement.
-        return null;
+        return new VariableExpression(variableName);
     }
 
-    public Expression createArithmeticExpression(String operator, String lhsAsString, String rhsAsString) {
-        // TODO: Implement.
-        return null;
+    public Expression createArithmeticExpression(String operator, String lhsAsString, String rhsAsString)
+    {
+        return switch(operator) {
+            case "+" -> new AddExpression(parseExpression(lhsAsString), parseExpression(rhsAsString));
+            case "-" -> new SubtractExpression(parseExpression(lhsAsString), parseExpression(rhsAsString));
+            case "/" -> new DivideExpression(parseExpression(lhsAsString), parseExpression(rhsAsString));
+            case "*" -> new MultipleExpression(parseExpression(lhsAsString), parseExpression(rhsAsString));
+            default -> throw new RuntimeException("Unrecognized operator: " + operator);
+        };
     }
 
     public Expression createFunctionCallExpression(String functionName, List<String> parameterValuesAsStrings) {
@@ -44,9 +48,9 @@ public class Parser {
         return null;
     }
 
-    public Statement createPrintStatement(String expressionAsString) {
-        // TODO: Implement.
-        return null;
+    public Statement createPrintStatement(String expressionAsString)
+    {
+        return new PrintStatement(parseExpression(expressionAsString));
     }
 
     public Statement createAssignStatement(String variableName, String expressionAsString) {

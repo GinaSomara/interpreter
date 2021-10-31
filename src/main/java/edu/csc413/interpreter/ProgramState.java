@@ -11,7 +11,7 @@ import java.util.*;
  * or set those values.
  */
 public class ProgramState {
-    // TODO: Implement. Add any instance variables you need.
+    HashMap<String, Integer> variableHM = new HashMap<>();
 
     public ProgramState() {
         // TODO: Implement. Initialize any instance variables you added.

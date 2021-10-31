@@ -1,13 +1,20 @@
 package edu.csc413.interpreter.statement;
 
 import edu.csc413.interpreter.ProgramState;
+import edu.csc413.interpreter.expression.Expression;
 
 public class PrintStatement implements Statement
 {
-    //IMPLEMENT
+    private Expression expressionToPrint;
+
+    public PrintStatement(Expression expression)
+    {
+        this.expressionToPrint = expression;
+    }
+
     @Override
     public void run(ProgramState programState)
     {
-        System.out.println();
+        System.out.println(expressionToPrint);
     }
 }

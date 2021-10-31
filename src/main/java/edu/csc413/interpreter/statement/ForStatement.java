@@ -13,15 +13,8 @@ public class ForStatement extends BlockStatement //implements Statement
                rangeStop;
 
     //need parameters
-    //implement list of body statements (INHERITED from BlockStatement)
-    public For()
-    {
-        //don't want to call super first becasue I need to make a list first???
-        //or I could do super(newMethodThatCreatesList(List info)) ?
-        //ADD code here for body statements in for loop
-        List<Statement> tempBody = new ArrayList<>();
-
-        super(new ArrayList<>());
+    public ForStatement(List<Statement> body) {
+        super(body);
     }
 
     //add code

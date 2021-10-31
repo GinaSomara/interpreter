@@ -12,6 +12,5 @@ public abstract class BlockStatement implements Statement
         this.body = body;
     }
 
-
     public abstract void runBlock();
 }
