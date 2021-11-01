@@ -21,12 +21,13 @@ public abstract class Condition {
      * getLhsValue and getRhsValue can be called by the subclasses of Condition that you add, in order to evaluate the
      * lhs and rhs expressions without having direct access to them.
      */
-
-    protected int getLhsValue(ProgramState programState) {
+    protected int getLhsValue(ProgramState programState)
+    {
         return lhs.evaluate(programState);
     }
 
-    protected int getRhsValue(ProgramState programState) {
+    protected int getRhsValue(ProgramState programState)
+    {
         return rhs.evaluate(programState);
     }
 }

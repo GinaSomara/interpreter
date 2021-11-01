@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
  * complete and don't need to be modified, though they do rely on your createConstantExpression, etc. methods being
  * implemented.
  */
-public class Parser {
+public class Parser
+{
     public Expression createConstantExpression(int value) {
         return new ConstantExpression(value);
     }
@@ -43,9 +44,14 @@ public class Parser {
         return null;
     }
 
-    public Condition createCondition(String operator, String lhsAsString, String rhsAsString) {
-        // TODO: Implement.
-        return null;
+    public Condition createCondition(String operator, String lhsAsString, String rhsAsString)
+    {
+        return switch(operator) {
+            case "<" -> new LessThanCondition(parseExpression(lhsAsString), parseExpression(rhsAsString));
+            case ">" -> new GreaterThanCondition(parseExpression(lhsAsString), parseExpression(rhsAsString));
+            case "==" -> new EqualToCondition(parseExpression(lhsAsString), parseExpression(rhsAsString));
+            default -> throw new RuntimeException("Unrecognized operator: " + operator);
+        };
     }
 
     public Statement createPrintStatement(String expressionAsString)
@@ -53,28 +59,28 @@ public class Parser {
         return new PrintStatement(parseExpression(expressionAsString));
     }
 
-    public Statement createAssignStatement(String variableName, String expressionAsString) {
-        // TODO: Implement.
-        return null;
+    public Statement createAssignStatement(String variableName, String expressionAsString)
+    {
+        return new AssignStatement(variableName, parseExpression(expressionAsString));
     }
 
-    public Statement createIfStatement(String conditionAsString, List<Statement> bodyStatements) {
-        // TODO: Implement.
-        return null;
+    public Statement createIfStatement(String conditionAsString, List<Statement> bodyStatements)
+    {
+        return new IfStatement(parseCondition(conditionAsString), bodyStatements);
     }
 
-    public Statement createWhileStatement(String conditionAsString, List<Statement> bodyStatements) {
-        // TODO: Implement.
-        return null;
+    public Statement createWhileStatement(String conditionAsString, List<Statement> bodyStatements)
+    {
+        return new WhileStatement(parseCondition(conditionAsString), bodyStatements);
     }
 
     public Statement createForStatement(
             String loopVariableName,
             String rangeStartAsString,
             String rangeEndAsString,
-            List<Statement> bodyStatements) {
-        // TODO: Implement.
-        return null;
+            List<Statement> bodyStatements)
+    {
+        return new ForStatement(loopVariableName, parseExpression(rangeStartAsString), parseExpression(rangeEndAsString), bodyStatements);
     }
 
     public Statement createDefineFunctionStatement(
@@ -136,7 +142,8 @@ public class Parser {
      * Converts a String representing a boolean condition into a Condition object, based on the pattern detected. NOTE:
      * You should call this methods from the above methods (other than createCondition) to turn a condition as a String
      * into an actual Condition object. This method will in turn call createCondition. */
-    private Condition parseCondition(String conditionAsString) {
+    private Condition parseCondition(String conditionAsString)
+    {
         for (String operator: CONDITION_OPERATORS) {
             Matcher matcher = Pattern.compile(String.format("^(.+)%s(.+)$", operator)).matcher(conditionAsString);
             if (matcher.matches()) {

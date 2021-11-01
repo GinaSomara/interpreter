@@ -4,7 +4,8 @@ import edu.csc413.interpreter.ProgramState;
 
 public class GreaterThanCondition extends Condition
 {
-    public GreaterThanCondition(Expression lhs, Expression rhs) {
+    public GreaterThanCondition(Expression lhs, Expression rhs)
+    {
         super(lhs, rhs);
     }
 

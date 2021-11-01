@@ -15,6 +15,6 @@ public class PrintStatement implements Statement
     @Override
     public void run(ProgramState programState)
     {
-        System.out.println(expressionToPrint);
+        System.out.println(expressionToPrint.evaluate(programState));
     }
 }

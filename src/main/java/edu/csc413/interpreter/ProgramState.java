@@ -10,22 +10,24 @@ import java.util.*;
  * should keep track of all defined variables, as well as their assigned values, and allow the running program to read
  * or set those values.
  */
-public class ProgramState {
-    HashMap<String, Integer> variableHM = new HashMap<>();
+public class ProgramState
+{
+    private HashMap<String, Integer> assignedVariables = new HashMap<>();
 
     public ProgramState() {
         // TODO: Implement. Initialize any instance variables you added.
     }
 
     /** Returns the integer value associated with the specified variable name in the current call frame. */
-    public int getVariable(String variable) {
-        // TODO: Implement.
-        return 0;
+    public int getVariable(String variable)
+    {
+        return assignedVariables.get(variable);
     }
 
     /** Sets the value for the specified variable name to the specified value in the current call frame. */
-    public void setVariable(String variable, int value) {
-        // TODO: Implement.
+    public void setVariable(String variable, int value)
+    {
+        assignedVariables.put(variable, value);
     }
 
     /** Adds a new, empty call frame to the top of the call stack, making it the new current call frame. */

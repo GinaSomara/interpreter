@@ -10,24 +10,36 @@ public class ForStatement extends BlockStatement //implements Statement
 {
     private String loopVariable;
     private Expression rangeStart,
-               rangeStop;
+                       rangeStop;
 
-    //need parameters
-    public ForStatement(List<Statement> body) {
-        super(body);
-    }
-
-    //add code
-    @Override
-    public void runBlock()
+    public ForStatement(String loopVariableName,
+                        Expression rangeStartAsString,
+                        Expression rangeEndAsString,
+                        List<Statement> body)
     {
-
+        super(body);
+        this.loopVariable = loopVariableName;
+        this.rangeStart = rangeStartAsString;
+        this.rangeStop = rangeEndAsString;
     }
 
-    //add code
+    @Override
+    public void runBlock(ProgramState programState)
+    {
+        for(Statement statement :getBody())
+        {
+            statement.run(programState);
+        }
+    }
+
     @Override
     public void run(ProgramState programState)
     {
-        //used to call upon information in the programState class
+        int start = rangeStart.evaluate(programState);
+        int end = rangeStop.evaluate(programState);
+        for(int loopVariable = start ; loopVariable++ < end ; loopVariable++)
+        {
+            runBlock(programState);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package edu.csc413.interpreter.statement;
 
+import edu.csc413.interpreter.ProgramState;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,5 +14,11 @@ public abstract class BlockStatement implements Statement
         this.body = body;
     }
 
-    public abstract void runBlock();
+    public List<Statement> getBody()
+    {
+        return this.body;
+    }
+
+
+    public abstract void runBlock(ProgramState programState);
 }

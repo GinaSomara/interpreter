@@ -5,12 +5,18 @@ import edu.csc413.interpreter.expression.Expression;
 
 public class AssignStatement implements Statement
 {
-    String variableName;
+    private String variableName;
     private Expression expressionToSave;
 
+    public AssignStatement(String variableName, Expression expression)
+    {
+        this.variableName = variableName;
+        this.expressionToSave = expression;
+    }
 
     @Override
-    public void run(ProgramState programState) {
-
+    public void run(ProgramState programState)
+    {
+        programState.setVariable(variableName, expressionToSave.evaluate(programState));
     }
 }
