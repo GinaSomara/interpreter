@@ -85,8 +85,7 @@ public class Parser
 
     public Statement createDefineFunctionStatement(
             String functionName, List<String> parameterNames, List<Statement> functionStatements) {
-        // TODO: Implement.
-        return null;
+        return new DefineFunctionStatement(functionName, parameterNames, functionStatements);
     }
 
     public Statement createReturnStatement(String expressionAsString) {

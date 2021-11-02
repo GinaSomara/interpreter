@@ -3,7 +3,8 @@
 package edu.csc413.interpreter;
 
 import edu.csc413.interpreter.statement.Statement;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * ProgramState represents the Program's storage information at any point in time while the program is running. It
@@ -12,33 +13,39 @@ import java.util.*;
  */
 public class ProgramState
 {
-    private HashMap<String, Integer> assignedVariables = new HashMap<>();
+    private HashMap<String, Integer> variableHashMap;
+    private HashMap<String, FunctionInformation> functionHashMap;
 
-    public ProgramState() {
-        // TODO: Implement. Initialize any instance variables you added.
+    public ProgramState()
+    {
+        variableHashMap = new HashMap<>();
+        functionHashMap = new HashMap<>();
+
     }
 
     /** Returns the integer value associated with the specified variable name in the current call frame. */
     public int getVariable(String variable)
     {
-        return assignedVariables.get(variable);
+        return variableHashMap.get(variable);
     }
 
     /** Sets the value for the specified variable name to the specified value in the current call frame. */
     public void setVariable(String variable, int value)
     {
-        assignedVariables.put(variable, value);
+        variableHashMap.put(variable, value);
     }
 
     /** Adds a new, empty call frame to the top of the call stack, making it the new current call frame. */
-    public void addCallFrame() {
+    public void addCallFrame()
+    {
         // TODO: Implement.
     }
 
     /**
      * Removes the topmost call frame from the call stack. The current call frame becomes the previous one in the stack.
      */
-    public void removeCallFrame() {
+    public void removeCallFrame()
+    {
         // TODO: Implement.
     }
 
@@ -47,19 +54,21 @@ public class ProgramState
      * the function name.
      */
     public void registerFunction(String functionName, List<String> parameterNames, List<Statement> functionStatements) {
-        // TODO: Implement.
+        FunctionInformation functionInformation = new FunctionInformation(parameterNames, functionStatements);
+        functionHashMap.put(functionName, functionInformation);
     }
 
     /** Returns the list of parameter names associated with the specified function name. */
     public List<String> getParameterNames(String functionName) {
-        // TODO: Implement.
-        return null;
+       FunctionInformation tempFunctionInfo = functionHashMap.get(functionName);
+       return tempFunctionInfo.getFunctionParameters();
     }
 
     /** Returns the list of function statements associated with the specified function name. */
-    public List<Statement> getFunctionStatements(String functionName) {
-        // TODO: Implement.
-        return null;
+    public List<Statement> getFunctionStatements(String functionName)
+    {
+        FunctionInformation tempFunctionInfo = functionHashMap.get(functionName);
+        return tempFunctionInfo.getFunctionStatements();
     }
 
     /** Returns whether or not a return value has been recorded. */
@@ -82,5 +91,28 @@ public class ProgramState
     /** Clears the recorded return value. hasReturnValue should return false after this method is called. */
     public void clearReturnValue() {
         // TODO: Implement.
+    }
+
+ //=================================================================================//
+    private static class FunctionInformation
+ {
+        List<String> parameterNames;
+        List<Statement> functionStatements;
+
+        FunctionInformation(List<String> parameterNames, List<Statement> functionStatements)
+        {
+            this.parameterNames = parameterNames;
+            this.functionStatements = functionStatements;
+        }
+
+        List<String> getFunctionParameters()
+        {
+            return this.parameterNames;
+        }
+
+        List<Statement> getFunctionStatements()
+        {
+            return this.functionStatements;
+        }
     }
 }
