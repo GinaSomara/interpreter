@@ -8,17 +8,17 @@ import java.util.List;
 
 public class ForStatement extends BlockStatement //implements Statement
 {
-    private String loopVariable;
+    private String forVariableName;
     private Expression rangeStart,
                        rangeStop;
 
-    public ForStatement(String loopVariableName,
+    public ForStatement(String forVariableNameName,
                         Expression rangeStartAsString,
                         Expression rangeEndAsString,
                         List<Statement> body)
     {
         super(body);
-        this.loopVariable = loopVariableName;
+        this.forVariableName = forVariableNameName;
         this.rangeStart = rangeStartAsString;
         this.rangeStop = rangeEndAsString;
     }
@@ -26,7 +26,7 @@ public class ForStatement extends BlockStatement //implements Statement
     @Override
     public void runBlock(ProgramState programState)
     {
-        for(Statement statement :getBody())
+        for(Statement statement : getBody())
         {
             statement.run(programState);
         }
@@ -37,8 +37,12 @@ public class ForStatement extends BlockStatement //implements Statement
     {
         int start = rangeStart.evaluate(programState);
         int end = rangeStop.evaluate(programState);
-        for(int loopVariable = start ; loopVariable++ < end ; loopVariable++)
+
+        //need to store variable so that items in the for loop can access the counter variable
+
+        for(int loopVar = start ; loopVar < end ; loopVar++)
         {
+            programState.setVariable(forVariableName, loopVar);
             runBlock(programState);
         }
     }
