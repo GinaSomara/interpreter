@@ -39,9 +39,21 @@ public class Parser
         };
     }
 
-    public Expression createFunctionCallExpression(String functionName, List<String> parameterValuesAsStrings) {
-        // TODO: Implement.
-        return null;
+    public Expression createFunctionCallExpression(String functionName, List<String> parameterValuesAsStrings)
+    {
+        List<Expression> valuesAsExpressions = new ArrayList<>();
+        for(String value : parameterValuesAsStrings)
+        {
+            Expression expressionTemp = parseExpression(value);
+
+            //need to ensure that parameter list ONLY CONTAINS constants or variables. NO assign or anything else
+            if(!((expressionTemp instanceof  VariableExpression) || (expressionTemp instanceof ConstantExpression)))
+                throw new RuntimeException("Unrecognized parameters: " + value);
+
+            valuesAsExpressions.add(expressionTemp);
+        }
+
+        return new FunctionCallExpression(functionName, valuesAsExpressions);
     }
 
     public Condition createCondition(String operator, String lhsAsString, String rhsAsString)
@@ -84,13 +96,13 @@ public class Parser
     }
 
     public Statement createDefineFunctionStatement(
-            String functionName, List<String> parameterNames, List<Statement> functionStatements) {
+            String functionName, List<String> parameterNames, List<Statement> functionStatements)
+    {
         return new DefineFunctionStatement(functionName, parameterNames, functionStatements);
     }
 
     public Statement createReturnStatement(String expressionAsString) {
-        // TODO: Implement.
-        return null;
+        return new ReturnStatement(parseExpression(expressionAsString));
     }
 
     /**

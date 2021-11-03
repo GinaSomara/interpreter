@@ -15,6 +15,7 @@ public class ProgramState
 {
     private HashMap<String, Integer> variableHashMap;
     private HashMap<String, FunctionInformation> functionHashMap;
+    private Integer returnValue = null;
 
     public ProgramState()
     {
@@ -59,7 +60,8 @@ public class ProgramState
     }
 
     /** Returns the list of parameter names associated with the specified function name. */
-    public List<String> getParameterNames(String functionName) {
+    public List<String> getParameterNames(String functionName)
+    {
        FunctionInformation tempFunctionInfo = functionHashMap.get(functionName);
        return tempFunctionInfo.getFunctionParameters();
     }
@@ -72,25 +74,29 @@ public class ProgramState
     }
 
     /** Returns whether or not a return value has been recorded. */
-    public boolean hasReturnValue() {
-        // TODO: Implement.
-        return false;
+    public boolean hasReturnValue()
+    {
+        if(returnValue == null)
+            return false;
+        else return true;
     }
 
     /** Returns the recorded return value, if it exists. */
-    public int getReturnValue() {
-        // TODO: Implement.
-        return 0;
+    public int getReturnValue()
+    {
+        return returnValue;
     }
 
     /** Records a return value. hasReturnValue should return true after this method is called. */
-    public void setReturnValue(int returnValue) {
-        // TODO: Implement.
+    public void setReturnValue(int returnValue)
+    {
+        this.returnValue = returnValue;
     }
 
     /** Clears the recorded return value. hasReturnValue should return false after this method is called. */
-    public void clearReturnValue() {
-        // TODO: Implement.
+    public void clearReturnValue()
+    {
+        returnValue = null;
     }
 
  //=================================================================================//

@@ -21,20 +21,5 @@ public class DefineFunctionStatement implements Statement
     public void run(ProgramState programState)
     {
         programState.registerFunction(functionName, functionParameters, functionStatements);
-        /**need to somehow turn the functionParameters from a list of Strings
-         * into a list of ints
-         */
-        List<Integer> parametersAsInts = getValueOfParameters(programState);
-
-    }
-
-    private List<Integer> getValueOfParameters(ProgramState programState)
-    {
-        List<Integer> parameters = new ArrayList<>();
-        for(String s : functionParameters)
-        {
-            parameters.add(programState.getVariable(s));
-        }
-        return parameters;
     }
 }
