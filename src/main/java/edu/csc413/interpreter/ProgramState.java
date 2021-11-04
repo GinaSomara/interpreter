@@ -3,8 +3,8 @@
 package edu.csc413.interpreter;
 
 import edu.csc413.interpreter.statement.Statement;
-import java.util.HashMap;
-import java.util.List;
+
+import java.util.*;
 
 /**
  * ProgramState represents the Program's storage information at any point in time while the program is running. It
@@ -13,33 +13,35 @@ import java.util.List;
  */
 public class ProgramState
 {
-    private HashMap<String, Integer> variableHashMap;
+    private Stack<HashMap<String, Integer>> stackVariableScope;
     private HashMap<String, FunctionInformation> functionHashMap;
     private Integer returnValue = null;
 
+
     public ProgramState()
     {
-        variableHashMap = new HashMap<>();
+        stackVariableScope = new Stack<>();
         functionHashMap = new HashMap<>();
-
+       addCallFrame();
     }
 
     /** Returns the integer value associated with the specified variable name in the current call frame. */
     public int getVariable(String variable)
     {
-        return variableHashMap.get(variable);
+        return stackVariableScope.peek().get(variable);
     }
 
     /** Sets the value for the specified variable name to the specified value in the current call frame. */
     public void setVariable(String variable, int value)
     {
-        variableHashMap.put(variable, value);
+        stackVariableScope.peek().put(variable, value);
     }
 
     /** Adds a new, empty call frame to the top of the call stack, making it the new current call frame. */
     public void addCallFrame()
     {
-        // TODO: Implement.
+        HashMap<String, Integer> variablesInScope = new HashMap<>();
+        stackVariableScope.push(variablesInScope);
     }
 
     /**
@@ -47,7 +49,10 @@ public class ProgramState
      */
     public void removeCallFrame()
     {
-        // TODO: Implement.
+        if(stackVariableScope.isEmpty())
+            throw new RuntimeException("Stack is empty! Nothing to pop off.");
+
+        stackVariableScope.pop();
     }
 
     /**
@@ -76,9 +81,7 @@ public class ProgramState
     /** Returns whether or not a return value has been recorded. */
     public boolean hasReturnValue()
     {
-        if(returnValue == null)
-            return false;
-        else return true;
+        return returnValue == null;
     }
 
     /** Returns the recorded return value, if it exists. */
@@ -98,6 +101,7 @@ public class ProgramState
     {
         returnValue = null;
     }
+
 
  //=================================================================================//
     private static class FunctionInformation

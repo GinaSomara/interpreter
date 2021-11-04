@@ -5,73 +5,67 @@ import edu.csc413.interpreter.statement.ReturnStatement;
 import edu.csc413.interpreter.statement.Statement;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class FunctionCallExpression implements Expression
-{
+public class FunctionCallExpression implements Expression {
     private String functionName;
     private List<Expression> parameterValues;
-    private HashMap<String, Integer> functionScopeVariablesHM;
 
-    public FunctionCallExpression(String functionName, List<Expression> parameterValues)
-    {
+    public FunctionCallExpression(String functionName, List<Expression> parameterValues) {
         this.functionName = functionName;
         this.parameterValues = parameterValues;
-        functionScopeVariablesHM = new HashMap<>();
     }
 
     @Override
     public int evaluate(ProgramState programState)
     {
-        List<Integer> parametersAsInts = getValueOfParameters(programState);
-        storeParametersIntoHM(programState, parametersAsInts);
+        //get Int values of Expression list passed in as a parameter
+        List<Integer> parameterValues = getParameterValues(programState);
+        //now that any previous scope parameters have been evaluated, we can push a new call stack on
+        programState.addCallFrame();
+        setVariablesIntoProgramStateHM(programState, parameterValues);
 
         List<Statement> statements = programState.getFunctionStatements(functionName);
-        for(Statement statement : statements)
-        {
+        for (Statement statement : statements) {
             statement.run(programState);
 
-            if(statement instanceof ReturnStatement)
-            {
-                if(programState.hasReturnValue())
-                {
+            if (statement instanceof ReturnStatement) {
+                if (programState.hasReturnValue()) {
                     int returnValue = programState.getReturnValue();
-                     programState.clearReturnValue();
-                     return returnValue;
-                }
-                else throw new RuntimeException("Function " + functionName + "contains no/void Return Value.");
+                    programState.clearReturnValue();
+                    programState.removeCallFrame();
+                    return returnValue;
+                } else throw new RuntimeException("Function " + functionName + "contains no/void Return Value.");
             }
         }
+
         //return should occur in forEach loop
-        throw new RuntimeException("Function " + functionName +" contains no Return Statement.");
+        throw new RuntimeException("Function " + functionName + " contains no Return Statement.");
     }
 
-    private List<Integer> getValueOfParameters(ProgramState programState)
+    private void setVariablesIntoProgramStateHM(ProgramState programState, List<Integer> parameterValues)
     {
-        List<Integer> parametersAsInts = new ArrayList<>();
-        for(Expression expressions : parameterValues)
-        {
-            parametersAsInts.add(expressions.evaluate(programState));
-        }
-        return parametersAsInts;
+        List<String> parameterNames = programState.getParameterNames(functionName);
+
+        if (parameterValues.size() != parameterNames.size())
+            throw new RuntimeException("Function " + functionName + " contains an uneven number of parameter names to parameter variables.");
+
+        Iterator<Integer> itParameterValue = parameterValues.iterator();
+        Iterator<String> itParameterName = parameterNames.iterator();
+
+        //add new variables to our current stack call frame
+        while (itParameterName.hasNext() && itParameterValue.hasNext())
+            programState.setVariable(itParameterName.next(), itParameterValue.next());
     }
 
-    private void  storeParametersIntoHM(ProgramState programState, List<Integer> parameterIntValues)
+    private List<Integer> getParameterValues(ProgramState programState)
     {
-        Iterator<Integer> itParameterValue = parameterIntValues.iterator();
-        Iterator<String> itParameterName = programState.getParameterNames(functionName).iterator();
+        List<Integer> parameterValues = new ArrayList<>();
+        for (Expression expression : this.parameterValues)
+            parameterValues.add(expression.evaluate(programState));
 
-        while(itParameterName.hasNext() && itParameterValue.hasNext())
-        {
-            functionScopeVariablesHM.put(itParameterName.next(), itParameterValue.next());
-        }
-
-        //ERROR checking//
-        if(itParameterName.hasNext())
-            throw new RuntimeException("There are more parameter names than values!");
-        if(itParameterValue.hasNext())
-            throw new RuntimeException("There are more values that parameter names!");
+        return parameterValues;
     }
 }
+
