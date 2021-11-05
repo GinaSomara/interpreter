@@ -1,0 +1,12 @@
+# testing early return statements, should print 10
+
+def find():
+    i = 0
+    while i < 100:
+        if i == 10:
+            return 10
+        if i == 20:
+            return 20
+        i = i +1
+
+print(find())

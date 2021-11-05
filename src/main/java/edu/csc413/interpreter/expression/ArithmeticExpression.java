@@ -13,7 +13,8 @@ public abstract class ArithmeticExpression implements Expression
         this.rhs = rhs;
     }
 
-    protected int getLhsValue(ProgramState programState) {
+    protected int getLhsValue(ProgramState programState)
+    {
         return lhs.evaluate(programState);
     }
 

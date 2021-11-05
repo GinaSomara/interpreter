@@ -5,7 +5,7 @@ import edu.csc413.interpreter.expression.Condition;
 
 import java.util.List;
 
-public abstract class ConditionBlock extends BlockStatement //implements Statement
+public abstract class ConditionBlock extends BlockStatement
 {
     private Condition condition;
 

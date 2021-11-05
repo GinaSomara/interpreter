@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 /** NOTE: You do NOT have to change any code in this file for Assignment 3. */
 public class Interpreter {
-    // Assorted regular expression patterns for statements we'll be parsing.
     private static final Pattern PRINT_PATTERN = Pattern.compile("^print\\((.+)\\)$");
     private static final Pattern ASSIGN_PATTERN = Pattern.compile("^(.+) = (.+)$");
     private static final Pattern RETURN_PATTERN = Pattern.compile("^return (.+)$");
@@ -23,7 +22,6 @@ public class Interpreter {
     private static final Pattern DEFINE_FUNCTION_PATTERN =
             Pattern.compile("^def ([A-Za-z][A-Za-z0-9_]*)\\(([A-Za-z0-9_,\\s]*)\\):$");
 
-    // The list of Statements created from parsing the Strings comprising the program.
     private final List<Statement> statements = new ArrayList<>();
 
     /**
@@ -44,8 +42,6 @@ public class Interpreter {
         }
     }
 
-    // Parse a single Statement from the front of the provided deque. Note that with block statements (if statements,
-    // while loops), a single Statement may involve multiple lines with multiple contained statements.
     private Statement parseStatement(Queue<String> lines, Parser parser, int indentationLevel) {
         String line = lines.remove();
         if (getIndentationLevel(line) != indentationLevel) {
@@ -93,7 +89,6 @@ public class Interpreter {
             return parser.createDefineFunctionStatement(functionName, parameterNames, bodyStatements);
         }
 
-        // Single line statements.
         Matcher printMatcher = PRINT_PATTERN.matcher(line);
         if (printMatcher.matches()) {
             String expressionAsString = printMatcher.group(1).trim();
@@ -164,9 +159,11 @@ public class Interpreter {
     }
 
     /** Run the parsed program Statements. */
-    public void runProgram() {
+    public void runProgram()
+    {
         ProgramState programState = new ProgramState();
-        for (Statement statement: statements) {
+        for (Statement statement: statements)
+        {
             statement.run(programState);
         }
     }

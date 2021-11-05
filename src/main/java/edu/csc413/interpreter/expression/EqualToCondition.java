@@ -4,7 +4,6 @@ import edu.csc413.interpreter.ProgramState;
 
 public class EqualToCondition extends Condition
 {
-
     public EqualToCondition(Expression lhs, Expression rhs) {
         super(lhs, rhs);
     }

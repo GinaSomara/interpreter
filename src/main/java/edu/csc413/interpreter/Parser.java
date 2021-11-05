@@ -46,10 +46,6 @@ public class Parser
         {
             Expression expressionTemp = parseExpression(value);
 
-            //need to ensure that parameter list ONLY CONTAINS constants or variables. NO assign or anything else
-            if(!((expressionTemp instanceof  VariableExpression) || (expressionTemp instanceof ConstantExpression) || expressionTemp instanceof ArithmeticExpression))
-                throw new RuntimeException("Unrecognized parameters: " + value);
-
             valuesAsExpressions.add(expressionTemp);
         }
 
@@ -125,7 +121,6 @@ public class Parser
                     Arrays.stream(functionCallMatcher.group(2).split(","))
                             .map(String::trim)
                             .collect(Collectors.toList());
-            //if nothing between ( ) <--no parameters
             if (parameterValuesAsStrings.size() == 1 && parameterValuesAsStrings.get(0).isEmpty()) {
                 parameterValuesAsStrings.clear();
             }

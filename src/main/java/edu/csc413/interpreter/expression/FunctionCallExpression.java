@@ -1,18 +1,19 @@
 package edu.csc413.interpreter.expression;
 
 import edu.csc413.interpreter.ProgramState;
-import edu.csc413.interpreter.statement.ReturnStatement;
 import edu.csc413.interpreter.statement.Statement;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class FunctionCallExpression implements Expression {
+public class FunctionCallExpression implements Expression
+{
     private String functionName;
     private List<Expression> parameterValues;
 
-    public FunctionCallExpression(String functionName, List<Expression> parameterValues) {
+    public FunctionCallExpression(String functionName, List<Expression> parameterValues)
+    {
         this.functionName = functionName;
         this.parameterValues = parameterValues;
     }
@@ -20,27 +21,26 @@ public class FunctionCallExpression implements Expression {
     @Override
     public int evaluate(ProgramState programState)
     {
-        //get Int values of Expression list passed in as a parameter
+        /* Gathering Integer values from Expressions passed int */
         List<Integer> parameterValues = getParameterValues(programState);
-        //now that any previous scope parameters have been evaluated, we can push a new call stack on
+        /* Previous call stack variables were taken care of above, now can push new scope onto stack */
         programState.addCallFrame();
+        /* Add new variables into top hashMap on call stack */
         setVariablesIntoProgramStateHM(programState, parameterValues);
 
-        List<Statement> statements = programState.getFunctionStatements(functionName);
-        for (Statement statement : statements) {
+        for (Statement statement : programState.getFunctionStatements(functionName))
+        {
             statement.run(programState);
 
-            if (statement instanceof ReturnStatement) {
-                if (programState.hasReturnValue()) {
-                    int returnValue = programState.getReturnValue();
-                    programState.clearReturnValue();
-                    programState.removeCallFrame();
-                    return returnValue;
-                } else throw new RuntimeException("Function " + functionName + "contains no/void Return Value.");
+            if (programState.hasReturnValue())
+            {
+                int returnValue = programState.getReturnValue();
+                programState.clearReturnValue();
+                programState.removeCallFrame();
+                return returnValue;
             }
         }
 
-        //return should occur in forEach loop
         throw new RuntimeException("Function " + functionName + " contains no Return Statement.");
     }
 
@@ -54,7 +54,6 @@ public class FunctionCallExpression implements Expression {
         Iterator<Integer> itParameterValue = parameterValues.iterator();
         Iterator<String> itParameterName = parameterNames.iterator();
 
-        //add new variables to our current stack call frame
         while (itParameterName.hasNext() && itParameterValue.hasNext())
             programState.setVariable(itParameterName.next(), itParameterValue.next());
     }

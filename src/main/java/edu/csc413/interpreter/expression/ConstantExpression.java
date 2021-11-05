@@ -14,7 +14,6 @@ public class ConstantExpression implements Expression
     @Override
     public int evaluate(ProgramState programState)
     {
-        //need to do anything ProgramState here????
         return this.value;
     }
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 public class WhileStatement extends ConditionBlock
 {
-    public WhileStatement(Condition condition, List<Statement> body) {
-
+    public WhileStatement(Condition condition, List<Statement> body)
+    {
         super(condition, body);
     }
 
@@ -24,6 +24,9 @@ public class WhileStatement extends ConditionBlock
         while (evaluateCondition(programState))
         {
             runBlock(programState);
+
+            if (programState.hasReturnValue())
+                return;
         }
     }
 
@@ -33,6 +36,9 @@ public class WhileStatement extends ConditionBlock
         for(Statement statement :getBody())
         {
             statement.run(programState);
+
+            if ((statement instanceof ReturnStatement) && programState.hasReturnValue())
+                break;
         }
     }
 }

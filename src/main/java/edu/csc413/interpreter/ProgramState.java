@@ -22,7 +22,7 @@ public class ProgramState
     {
         stackVariableScope = new Stack<>();
         functionHashMap = new HashMap<>();
-       addCallFrame();
+        addCallFrame();
     }
 
     /** Returns the integer value associated with the specified variable name in the current call frame. */
@@ -81,12 +81,15 @@ public class ProgramState
     /** Returns whether or not a return value has been recorded. */
     public boolean hasReturnValue()
     {
-        return returnValue == null;
+        return returnValue != null;
     }
 
     /** Returns the recorded return value, if it exists. */
     public int getReturnValue()
     {
+        if(!hasReturnValue())
+            throw new RuntimeException("Cannot retrieve Return Value, return value is NULL");
+
         return returnValue;
     }
 

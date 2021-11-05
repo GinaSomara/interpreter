@@ -1,15 +1,15 @@
-//PROVIDED CODE
-
 package edu.csc413.interpreter.expression;
 
 import edu.csc413.interpreter.ProgramState;
 
 /** Conditional comparison of two expressions that can evaluate to true or false. */
-public abstract class Condition {
+public abstract class Condition
+{
     private Expression lhs;
     private Expression rhs;
 
-    public Condition(Expression lhs, Expression rhs) {
+    public Condition(Expression lhs, Expression rhs)
+    {
         this.lhs = lhs;
         this.rhs = rhs;
     }

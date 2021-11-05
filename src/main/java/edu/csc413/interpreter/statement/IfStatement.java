@@ -15,10 +15,19 @@ public class IfStatement extends ConditionBlock
     @Override
     public void runBlock(ProgramState programState)
     {
-        for(Statement statement : getBody())
-        {
+        for(Statement statement : getBody()) {
             statement.run(programState);
+
+            if ((statement instanceof ReturnStatement) && programState.hasReturnValue())
+                return;
         }
+    }
+
+    @Override
+    public void run(ProgramState programState)
+    {
+        if (evaluateCondition(programState))
+            runBlock(programState);
     }
 
     @Override
@@ -26,12 +35,4 @@ public class IfStatement extends ConditionBlock
     {
         return getCondition().evaluate(programState);
     }
-
-    @Override
-    public void run(ProgramState programState)
-    {
-        if(evaluateCondition(programState))
-            runBlock(programState);
-    }
 }
-
