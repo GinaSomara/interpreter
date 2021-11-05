@@ -37,7 +37,7 @@ public class WhileStatement extends ConditionBlock
         {
             statement.run(programState);
 
-            if ((statement instanceof ReturnStatement) && programState.hasReturnValue())
+            if (programState.hasReturnValue())
                 break;
         }
     }

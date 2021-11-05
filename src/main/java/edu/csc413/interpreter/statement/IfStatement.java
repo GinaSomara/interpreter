@@ -18,7 +18,7 @@ public class IfStatement extends ConditionBlock
         for(Statement statement : getBody()) {
             statement.run(programState);
 
-            if ((statement instanceof ReturnStatement) && programState.hasReturnValue())
+            if (programState.hasReturnValue())
                 return;
         }
     }
