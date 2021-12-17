@@ -1,7 +1,5 @@
 package edu.csc413.interpreter.expression;
 
-import edu.csc413.interpreter.ProgramState;
-
 public class EqualToCondition extends Condition
 {
     public EqualToCondition(Expression lhs, Expression rhs) {
@@ -9,8 +7,8 @@ public class EqualToCondition extends Condition
     }
 
     @Override
-    public boolean evaluate(ProgramState programState)
+    public boolean evaluate()
     {
-        return getLhsValue(programState) == getRhsValue(programState);
+        return getLhsValue() == getRhsValue();
     }
 }

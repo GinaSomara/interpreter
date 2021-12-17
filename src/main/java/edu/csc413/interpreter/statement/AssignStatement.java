@@ -15,8 +15,8 @@ public class AssignStatement implements Statement
     }
 
     @Override
-    public void run(ProgramState programState)
+    public void run()
     {
-        programState.setVariable(variableName, expressionToSave.evaluate(programState));
+        ProgramState.getProgramState().setVariable(variableName, expressionToSave.evaluate());
     }
 }

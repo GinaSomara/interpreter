@@ -1,6 +1,5 @@
 package edu.csc413.interpreter.statement;
 
-import edu.csc413.interpreter.ProgramState;
 import edu.csc413.interpreter.expression.Expression;
 
 public class PrintStatement implements Statement
@@ -13,8 +12,8 @@ public class PrintStatement implements Statement
     }
 
     @Override
-    public void run(ProgramState programState)
+    public void run()
     {
-        System.out.println(expressionToPrint.evaluate(programState));
+        System.out.println(expressionToPrint.evaluate());
     }
 }

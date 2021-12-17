@@ -1,6 +1,5 @@
 package edu.csc413.interpreter.statement;
 
-import edu.csc413.interpreter.ProgramState;
 import edu.csc413.interpreter.expression.Condition;
 
 import java.util.List;
@@ -20,6 +19,6 @@ public abstract class ConditionBlock extends BlockStatement
         return condition;
     }
 
-    public abstract boolean evaluateCondition(ProgramState programState);
+    public abstract boolean evaluateCondition();
 
 }

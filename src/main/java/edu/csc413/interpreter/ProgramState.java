@@ -18,12 +18,19 @@ public class ProgramState
     private Integer returnValue = null;
 
 
-    public ProgramState()
+    //======= Used to create a static ProgramState that will be used by the whole class ========//
+    private static ProgramState programState = new ProgramState();
+
+    private ProgramState()
     {
         stackVariableScope = new Stack<>();
         functionHashMap = new HashMap<>();
         addCallFrame();
     }
+
+    public static ProgramState getProgramState() { return programState;}
+    //==========================================================================================//
+
 
     /** Returns the integer value associated with the specified variable name in the current call frame. */
     public int getVariable(String variable)

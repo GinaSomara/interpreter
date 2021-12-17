@@ -14,8 +14,8 @@ public class ReturnStatement implements Statement
     }
 
     @Override
-    public void run(ProgramState programState)
+    public void run()
     {
-        programState.setReturnValue(returnExpression.evaluate(programState));
+        ProgramState.getProgramState().setReturnValue(returnExpression.evaluate());
     }
 }

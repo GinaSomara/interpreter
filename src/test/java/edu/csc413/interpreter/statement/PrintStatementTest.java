@@ -13,9 +13,8 @@ public class PrintStatementTest
     @Test
     public void printConstant()
     {
-        ProgramState programState = new ProgramState();
         PrintStatement printStatement = new PrintStatement(new ConstantExpression(10));
 
-        printStatement.run(programState);
+        printStatement.run();
     }
 }

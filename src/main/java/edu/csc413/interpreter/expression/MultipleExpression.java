@@ -1,7 +1,5 @@
 package edu.csc413.interpreter.expression;
 
-import edu.csc413.interpreter.ProgramState;
-
 public class MultipleExpression extends ArithmeticExpression
 {
     public MultipleExpression(Expression lhs, Expression rhs)
@@ -10,8 +8,8 @@ public class MultipleExpression extends ArithmeticExpression
     }
 
     @Override
-    public int evaluate(ProgramState programState)
+    public int evaluate()
     {
-        return getLhsValue(programState) * getRhsValue(programState);
+        return getLhsValue() * getRhsValue();
     }
 }

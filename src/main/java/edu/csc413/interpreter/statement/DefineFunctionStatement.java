@@ -1,7 +1,6 @@
 package edu.csc413.interpreter.statement;
 import edu.csc413.interpreter.ProgramState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DefineFunctionStatement implements Statement
@@ -18,8 +17,8 @@ public class DefineFunctionStatement implements Statement
     }
 
     @Override
-    public void run(ProgramState programState)
+    public void run()
     {
-        programState.registerFunction(functionName, functionParameters, functionStatements);
+        ProgramState.getProgramState().registerFunction(functionName, functionParameters, functionStatements);
     }
 }

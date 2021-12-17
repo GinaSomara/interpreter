@@ -15,5 +15,5 @@ public interface Statement {
      * run accepts a ProgramState parameter. If the statement needs to look up variable or function information when
      * being run, it can do so by calling methods on programState.
      */
-    void run(ProgramState programState);
+    void run();
 }

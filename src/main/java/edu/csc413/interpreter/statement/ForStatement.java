@@ -24,29 +24,29 @@ public class ForStatement extends BlockStatement //implements Statement
     }
 
     @Override
-    public void run(ProgramState programState)
+    public void run()
     {
-        int start = rangeStart.evaluate(programState);
-        int end = rangeStop.evaluate(programState);
+        int start = rangeStart.evaluate();
+        int end = rangeStop.evaluate();
 
         for(int loopVar = start ; loopVar < end ; loopVar++)
         {
-            programState.setVariable(forVariableName, loopVar);
-            runBlock(programState);
+            ProgramState.getProgramState().setVariable(forVariableName, loopVar);
+            runBlock();
 
-            if (programState.hasReturnValue())
+            if (ProgramState.getProgramState().hasReturnValue())
                 return;
         }
     }
 
     @Override
-    public void runBlock(ProgramState programState)
+    public void runBlock()
     {
         for(Statement statement : getBody())
         {
-            statement.run(programState);
+            statement.run();
 
-            if (programState.hasReturnValue())
+            if (ProgramState.getProgramState().hasReturnValue())
                 return;
         }
     }

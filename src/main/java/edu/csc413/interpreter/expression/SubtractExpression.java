@@ -1,8 +1,5 @@
 package edu.csc413.interpreter.expression;
 
-import edu.csc413.interpreter.ProgramState;
-import edu.csc413.interpreter.expression.Expression;
-
 public class SubtractExpression extends ArithmeticExpression
 {
     public SubtractExpression(Expression lhs, Expression rhs)
@@ -11,8 +8,8 @@ public class SubtractExpression extends ArithmeticExpression
     }
 
     @Override
-    public int evaluate(ProgramState programState)
+    public int evaluate()
     {
-        return getLhsValue(programState) - getRhsValue(programState);
+        return getLhsValue() - getRhsValue();
     }
 }

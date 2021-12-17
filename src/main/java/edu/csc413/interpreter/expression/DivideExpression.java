@@ -10,8 +10,8 @@ public class DivideExpression extends ArithmeticExpression
     }
 
     @Override
-    public int evaluate(ProgramState programState)
+    public int evaluate()
     {
-        return getLhsValue(programState) / getRhsValue(programState);
+        return getLhsValue() / getRhsValue();
     }
 }

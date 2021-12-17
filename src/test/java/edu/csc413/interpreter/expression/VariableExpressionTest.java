@@ -6,43 +6,43 @@ import static org.hamcrest.Matchers.*;
 import edu.csc413.interpreter.ProgramState;
 import org.junit.jupiter.api.Test;
 
-/** Unit tests for VariableExpression. Uncomment the lines in the tests once VariableExpression is implemented. */
-public class VariableExpressionTest {
+public class VariableExpressionTest
+{
     @Test
-    public void evaluate_positiveValue() {
-        //ProgramState programState = new ProgramState();
-        //programState.setVariable("x", 8);
-        //VariableExpression expression = new VariableExpression("x");
+    public void evaluate_positiveValue()
+    {
+        ProgramState.getProgramState().setVariable("x", 8);
+        VariableExpression expression = new VariableExpression("x");
 
-        //assertThat(expression.evaluate(programState), equalTo(8));
+        assertThat(expression.evaluate(), equalTo(8));
     }
 
     @Test
-    public void evaluate_negativeValue() {
-        //ProgramState programState = new ProgramState();
-        //programState.setVariable("num", -6);
-        //VariableExpression expression = new VariableExpression("num");
+    public void evaluate_negativeValue()
+    {
+        ProgramState.getProgramState().setVariable("num", -6);
+        VariableExpression expression = new VariableExpression("num");
 
-        //assertThat(expression.evaluate(programState), equalTo(-6));
+        assertThat(expression.evaluate(), equalTo(-6));
     }
 
     @Test
-    public void evaluate_otherVariables() {
-        //ProgramState programState = new ProgramState();
-        //programState.setVariable("m", 7);
-        //programState.setVariable("n", -4);
-        //VariableExpression expression = new VariableExpression("m");
+    public void evaluate_multipleVariables()
+    {
+        ProgramState.getProgramState().setVariable("m", 7);
+        ProgramState.getProgramState().setVariable("n", -4);
+        VariableExpression expression = new VariableExpression("m");
 
-        //assertThat(expression.evaluate(programState), equalTo(7));
+        assertThat(expression.evaluate(), equalTo(7));
     }
 
     @Test
-    public void evaluate_changedValue() {
-        //ProgramState programState = new ProgramState();
-        //programState.setVariable("x", 7);
-        //programState.setVariable("x", -4);
-        //VariableExpression expression = new VariableExpression("x");
+    public void evaluate_changedValue()
+    {
+        ProgramState.getProgramState().setVariable("x", 7);
+        ProgramState.getProgramState().setVariable("x", -4);
+        VariableExpression expression = new VariableExpression("x");
 
-        //assertThat(expression.evaluate(programState), equalTo(-4));
+        assertThat(expression.evaluate(), equalTo(-4));
     }
 }

@@ -1,7 +1,5 @@
 package edu.csc413.interpreter.statement;
 
-import edu.csc413.interpreter.ProgramState;
-
 import java.util.List;
 
 public abstract class BlockStatement implements Statement
@@ -19,5 +17,5 @@ public abstract class BlockStatement implements Statement
     }
 
 
-    public abstract void runBlock(ProgramState programState);
+    public abstract void runBlock();
 }

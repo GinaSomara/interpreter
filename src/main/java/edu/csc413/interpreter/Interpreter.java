@@ -161,10 +161,9 @@ public class Interpreter {
     /** Run the parsed program Statements. */
     public void runProgram()
     {
-        ProgramState programState = new ProgramState();
         for (Statement statement: statements)
         {
-            statement.run(programState);
+            statement.run();
         }
     }
 

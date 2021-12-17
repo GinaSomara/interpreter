@@ -19,34 +19,34 @@ public class FunctionCallExpression implements Expression
     }
 
     @Override
-    public int evaluate(ProgramState programState)
+    public int evaluate()
     {
         /* Gathering Integer values from Expressions passed int */
-        List<Integer> parameterValues = getParameterValues(programState);
+        List<Integer> parameterValues = getParameterValues();
         /* Previous call stack variables were taken care of above, now can push new scope onto stack */
-        programState.addCallFrame();
+        ProgramState.getProgramState().addCallFrame();
         /* Add new variables into top hashMap on call stack */
-        setVariablesIntoProgramStateHM(programState, parameterValues);
+        setVariablesIntoProgramStateHM(parameterValues);
 
-        for (Statement statement : programState.getFunctionStatements(functionName))
+        for (Statement statement : ProgramState.getProgramState().getFunctionStatements(functionName))
         {
-            statement.run(programState);
+            statement.run();
 
-            if (programState.hasReturnValue())
+            if (ProgramState.getProgramState().hasReturnValue())
             {
-                int returnValue = programState.getReturnValue();
-                programState.clearReturnValue();
-                programState.removeCallFrame();
+                int returnValue = ProgramState.getProgramState().getReturnValue();
+                ProgramState.getProgramState().clearReturnValue();
+                ProgramState.getProgramState().removeCallFrame();
                 return returnValue;
             }
         }
-
         throw new RuntimeException("Function " + functionName + " contains no Return Statement.");
     }
 
-    private void setVariablesIntoProgramStateHM(ProgramState programState, List<Integer> parameterValues)
+
+    private void setVariablesIntoProgramStateHM(List<Integer> parameterValues)
     {
-        List<String> parameterNames = programState.getParameterNames(functionName);
+        List<String> parameterNames = ProgramState.getProgramState().getParameterNames(functionName);
 
         if (parameterValues.size() != parameterNames.size())
             throw new RuntimeException("Function " + functionName + " contains an uneven number of parameter names to parameter variables.");
@@ -55,14 +55,14 @@ public class FunctionCallExpression implements Expression
         Iterator<String> itParameterName = parameterNames.iterator();
 
         while (itParameterName.hasNext() && itParameterValue.hasNext())
-            programState.setVariable(itParameterName.next(), itParameterValue.next());
+            ProgramState.getProgramState().setVariable(itParameterName.next(), itParameterValue.next());
     }
 
-    private List<Integer> getParameterValues(ProgramState programState)
+    private List<Integer> getParameterValues()
     {
         List<Integer> parameterValues = new ArrayList<>();
         for (Expression expression : this.parameterValues)
-            parameterValues.add(expression.evaluate(programState));
+            parameterValues.add(expression.evaluate());
 
         return parameterValues;
     }

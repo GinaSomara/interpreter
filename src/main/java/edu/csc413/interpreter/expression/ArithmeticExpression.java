@@ -1,7 +1,5 @@
 package edu.csc413.interpreter.expression;
 
-import edu.csc413.interpreter.ProgramState;
-
 public abstract class ArithmeticExpression implements Expression
 {
     private Expression lhs,
@@ -13,12 +11,12 @@ public abstract class ArithmeticExpression implements Expression
         this.rhs = rhs;
     }
 
-    protected int getLhsValue(ProgramState programState)
+    protected int getLhsValue()
     {
-        return lhs.evaluate(programState);
+        return lhs.evaluate();
     }
 
-    protected int getRhsValue(ProgramState programState) {
-        return rhs.evaluate(programState);
+    protected int getRhsValue() {
+        return rhs.evaluate();
     }
 }

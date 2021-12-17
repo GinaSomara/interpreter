@@ -1,7 +1,5 @@
 package edu.csc413.interpreter.expression;
 
-import edu.csc413.interpreter.ProgramState;
-
 public class ConstantExpression implements Expression
 {
     private int value;
@@ -12,7 +10,7 @@ public class ConstantExpression implements Expression
     }
 
     @Override
-    public int evaluate(ProgramState programState)
+    public int evaluate()
     {
         return this.value;
     }

@@ -12,8 +12,8 @@ public class VariableExpression implements Expression
     }
 
     @Override
-    public int evaluate(ProgramState programState)
+    public int evaluate()
     {
-        return programState.getVariable(varName);
+        return ProgramState.getProgramState().getVariable(varName);
     }
 }
