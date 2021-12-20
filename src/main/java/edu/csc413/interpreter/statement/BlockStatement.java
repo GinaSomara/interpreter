@@ -1,5 +1,7 @@
 package edu.csc413.interpreter.statement;
 
+import edu.csc413.interpreter.ProgramState;
+
 import java.util.List;
 
 public abstract class BlockStatement implements Statement
@@ -11,11 +13,15 @@ public abstract class BlockStatement implements Statement
         this.body = body;
     }
 
-    public List<Statement> getBody()
+
+    protected void runBlock()
     {
-        return this.body;
+        for(Statement statement : body)
+        {
+            statement.run();
+
+            if (ProgramState.getProgramState().hasReturnValue())
+                break;
+        }
     }
-
-
-    public abstract void runBlock();
 }

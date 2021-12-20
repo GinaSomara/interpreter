@@ -21,7 +21,7 @@ public class FunctionCallExpression implements Expression
     @Override
     public int evaluate()
     {
-        /* Gathering Integer values from Expressions passed int */
+        /* Gathering Integer values from Expressions passed as ints */
         List<Integer> parameterValues = getParameterValues();
         /* Previous call stack variables were taken care of above, now can push new scope onto stack */
         ProgramState.getProgramState().addCallFrame();

@@ -19,6 +19,9 @@ public abstract class ConditionBlock extends BlockStatement
         return condition;
     }
 
-    public abstract boolean evaluateCondition();
+    protected boolean evaluateCondition()
+    {
+        return getCondition().evaluate();
+    }
 
 }

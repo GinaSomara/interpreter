@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class AddExpressionTest
 {
-    /**  */
-
     @Test
     public void test_constantAddition()   // x = 5 + 3
     {
@@ -39,10 +37,9 @@ public class AddExpressionTest
     }
 
     @Test
-    public void test_NegativeAddition()
+    public void test_NegativeAddition()   //
     {
         AddExpression expression = new AddExpression(new ConstantExpression(-1), new ConstantExpression(0));
         assertThat(expression.evaluate(), equalTo(-1));
-
     }
 }

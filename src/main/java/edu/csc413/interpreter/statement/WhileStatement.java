@@ -13,12 +13,6 @@ public class WhileStatement extends ConditionBlock
     }
 
     @Override
-    public boolean evaluateCondition()
-    {
-        return getCondition().evaluate();
-    }
-
-    @Override
     public void run()
     {
         while (evaluateCondition())
@@ -27,18 +21,6 @@ public class WhileStatement extends ConditionBlock
 
             if (ProgramState.getProgramState().hasReturnValue())
                 return;
-        }
-    }
-
-    @Override
-    public void runBlock()
-    {
-        for(Statement statement :getBody())
-        {
-            statement.run();
-
-            if (ProgramState.getProgramState().hasReturnValue())
-                break;
         }
     }
 }

@@ -38,16 +38,4 @@ public class ForStatement extends BlockStatement //implements Statement
                 return;
         }
     }
-
-    @Override
-    public void runBlock()
-    {
-        for(Statement statement : getBody())
-        {
-            statement.run();
-
-            if (ProgramState.getProgramState().hasReturnValue())
-                return;
-        }
-    }
 }

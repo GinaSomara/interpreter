@@ -13,26 +13,9 @@ public class IfStatement extends ConditionBlock
     }
 
     @Override
-    public void runBlock()
-    {
-        for(Statement statement : getBody()) {
-            statement.run();
-
-            if (ProgramState.getProgramState().hasReturnValue())
-                return;
-        }
-    }
-
-    @Override
     public void run()
     {
         if (evaluateCondition())
             runBlock();
-    }
-
-    @Override
-    public boolean evaluateCondition()
-    {
-        return getCondition().evaluate();
     }
 }
