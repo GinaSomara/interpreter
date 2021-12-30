@@ -1,5 +1,3 @@
-//PROVIDED CODE
-
 package interpreter;
 
 import interpreter.statement.Statement;

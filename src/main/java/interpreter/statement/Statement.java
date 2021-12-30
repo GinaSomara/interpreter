@@ -1,5 +1,3 @@
-//PROVIDED CODE
-
 package interpreter.statement;
 
 /**
