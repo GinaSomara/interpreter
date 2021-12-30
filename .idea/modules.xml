@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/csc-413-a3-interpreter-GinaSomara.iml" filepath="$PROJECT_DIR$/.idea/csc-413-a3-interpreter-GinaSomara.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/interpreter.iml" filepath="$PROJECT_DIR$/.idea/interpreter.iml" />
     </modules>
   </component>
 </project>
