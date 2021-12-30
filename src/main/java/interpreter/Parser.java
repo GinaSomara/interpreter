@@ -1,5 +1,3 @@
-//PROVIDED CODE
-
 package interpreter;
 
 import interpreter.expression.*;
@@ -12,12 +10,9 @@ import java.util.stream.Collectors;
 
 /**
  * The Parser class is used to convert information that Interpreter pulls from the program lines into actual Statement,
- * Expression, and Condition objects. You will need to implement all of the methods marked by TODO.
- *
- * You will find it useful to call parseExpression and parseCondition in your implementation. Both of these are already
- * complete and don't need to be modified, though they do rely on your createConstantExpression, etc. methods being
- * implemented.
+ * Expression, and Condition objects.
  */
+
 public class Parser
 {
     public Expression createConstantExpression(int value) {
@@ -102,10 +97,8 @@ public class Parser
     }
 
     /**
-     * Converts a String representing an expression into an Expression object, based on the pattern detected. NOTE: You
-     * should call this methods from the above methods (other than createConstantExpression and
-     * createVariableExpression) to turn an expression as a String into an actual Expression object. This method will in
-     * turn call the appropriate createConstantExpression, createVariableExpression, etc. method based on the string.
+     * Converts a String representing an expression into an Expression object, based on the pattern detected. This method will
+     * call the appropriate createConstantExpression, createVariableExpression, etc. method based on the string.
      */
     private Expression parseExpression(String expressionAsString) {
         if (expressionAsString.matches(CONSTANT_PATTERN.pattern())) {
@@ -146,9 +139,9 @@ public class Parser
     }
 
     /**
-     * Converts a String representing a boolean condition into a Condition object, based on the pattern detected. NOTE:
-     * You should call this methods from the above methods (other than createCondition) to turn a condition as a String
-     * into an actual Condition object. This method will in turn call createCondition. */
+     * Converts a String representing a boolean condition into a Condition object, based on the pattern detected.
+     * This method will call createCondition.
+     * */
     private Condition parseCondition(String conditionAsString)
     {
         for (String operator: CONDITION_OPERATORS) {

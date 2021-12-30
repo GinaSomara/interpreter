@@ -17,7 +17,7 @@ public abstract class Condition
     public abstract boolean evaluate();
 
     /**
-     * getLhsValue and getRhsValue can be called by the subclasses of Condition that you add, in order to evaluate the
+     * getLhsValue and getRhsValue can be called by the subclasses of Condition, in order to evaluate the
      * lhs and rhs expressions without having direct access to them.
      */
     protected int getLhsValue()

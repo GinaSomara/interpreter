@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/** NOTE: You do NOT have to change any code in this file for Assignment 3. */
 public class Interpreter {
     private static final Pattern PRINT_PATTERN = Pattern.compile("^print\\((.+)\\)$");
     private static final Pattern ASSIGN_PATTERN = Pattern.compile("^(.+) = (.+)$");
@@ -109,9 +108,9 @@ public class Interpreter {
         throw new RuntimeException("Unrecognized statement: " + line);
     }
 
-    // parseBodyStatements is called when parsing any statement type with multiple lines. It will keep converting lines
-    // into Statements and collecting them in a List until it encounters a line with an indentation level to the left of
-    // indentationLevel (i.e. unindented from what was expected).
+    /** parseBodyStatements is called when parsing any statement type with multiple lines. It will keep converting lines
+     * into Statements and collecting them in a List until it encounters a line with an indentation level to the left of
+     * indentationLevel (i.e. unindented from what was expected) **/
     private List<Statement> parseBodyStatements(Queue<String> lines, Parser parser, int indentationLevel) {
         if (lines.isEmpty()) {
             throw new RuntimeException("Block statement (if, for, while, etc.) found with an empty body.");
