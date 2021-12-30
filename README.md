@@ -1,4 +1,4 @@
-A projet that simulates a Python Interpreter. This project sorts and runs Python code.
+A project that simulates a Python Interpreter. This project sorts and runs Python code.
 
 For more info -> http://ginasomara-portfolio.herokuapp.com
 

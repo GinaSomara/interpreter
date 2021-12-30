@@ -70,7 +70,7 @@ public class ProgramState
         FunctionInformation functionInformation = new FunctionInformation(parameterNames, functionStatements);
         functionHashMap.put(functionName, functionInformation);
     }
-    
+
     public List<String> getParameterNames(String functionName)
     {
        FunctionInformation tempFunctionInfo = functionHashMap.get(functionName);
