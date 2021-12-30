@@ -1,4 +1,4 @@
-# This program prints out all of the perfect divisors of 144. Perfect divisors divide evenly into a number without any
+# This program prints out perfect divisors of 144. Perfect divisors divide evenly into a number without any
 # remainder left over. The program finds them with a series of while loops. It should print out:
 # 1, 2, 3, 4, 6, 8, 9, 12, 16, 18, 24, 36, 48, 72, 144.
 number = 1
